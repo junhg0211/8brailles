@@ -3,6 +3,19 @@ let textarea;
 let checkboxes = [];
 let keys = 'fdsjkla;';
 
+function insert() {
+    let index = 0;
+    for (let i = 0; i < 8; i++) {
+        if (checkboxes[i].checked) {
+            index += 1 << i;
+            checkboxes[i].checked = false;
+        }
+    }
+
+    textarea.value = textarea.value.substring(0, textarea.value.length-1)
+        + String.fromCharCode(0x2800 + index);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     textarea = document.querySelector('#textarea');
 
@@ -28,16 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (textarea.value[textarea.value.length-1] === ' ') {
-            let index = 0;
-            for (let i = 0; i < 8; i++) {
-                if (checkboxes[i].checked) {
-                    index += 1 << i;
-                    checkboxes[i].checked = false;
-                }
-            }
-
-            textarea.value = textarea.value.substring(0, textarea.value.length-1)
-                + String.fromCharCode(0x2800 + index);
+            insert();
         }
     });
 })
