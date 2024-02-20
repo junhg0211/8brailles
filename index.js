@@ -12,8 +12,7 @@ function insert() {
         }
     }
 
-    textarea.value = textarea.value.substring(0, textarea.value.length-1)
-        + String.fromCharCode(0x2800 + index);
+    textarea.value += String.fromCharCode(0x2800 + index);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (textarea.value[textarea.value.length-1] === ' ') {
+            textarea.value = textarea.value.substring(0, textarea.value.length-1);
             insert();
         }
     });
